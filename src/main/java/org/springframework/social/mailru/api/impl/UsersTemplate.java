@@ -46,6 +46,10 @@ public class UsersTemplate extends AbstractMailruOperations implements UsersOper
                 profile.setPhoto(profilesMap.get("pic"));
             }
 
+            if (profilesMap.containsKey("birthday")) {
+                profile.setBirthday(profilesMap.get("birthday"));
+            }
+
             return profile;
         }
         return null;

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.mailru.Const;
 import org.springframework.util.DigestUtils;
 
 public abstract class AbstractMailruOperations {
@@ -41,7 +42,7 @@ public abstract class AbstractMailruOperations {
 
     protected void requireAuthorization() {
         if (!isAuthorized) {
-            throw new MissingAuthorizationException();
+            throw new MissingAuthorizationException(Const.providerId);
         }
     }
 
@@ -57,6 +58,7 @@ public abstract class AbstractMailruOperations {
             url.append(param).append("=").append(URLEncoder.encode(value)).append("&");
         }
         signature.append(clientSecret);
+//        signature.append("d683fa0e56ea5bd500ad7724c2e01864");
         url.append("sig=").append(encodeSignarure(signature.toString()));
 
         return url.toString();

@@ -27,4 +27,10 @@ public class MailruConnectionFactory extends OAuth2ConnectionFactory<Mailru> {
 	public MailruConnectionFactory(String clientId, String clientSecret) {
 		super("mailru", new MailruServiceProvider(clientId, clientSecret), new MailruAdapter());
 	}
+
+	public MailruConnectionFactory(String clientId, String clientSecret, String appNamespace) {
+		super("mailru", new MailruServiceProvider(clientId, clientSecret), new MailruAdapter());
+	}
+
+
 }

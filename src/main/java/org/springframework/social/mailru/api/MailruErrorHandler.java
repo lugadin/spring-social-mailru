@@ -18,6 +18,7 @@ package org.springframework.social.mailru.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.*;
+import org.springframework.social.mailru.Const;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class MailruErrorHandler extends DefaultResponseErrorHandler {
 		try {
 			super.handleError(response);
 		} catch(Exception e) {
-			throw new UncategorizedApiException("Error consuming Mailru REST API", e);
+			throw new UncategorizedApiException(Const.providerId, "Error consuming Mailru REST API", e);
 		}
 	}
 
@@ -50,21 +51,21 @@ public class MailruErrorHandler extends DefaultResponseErrorHandler {
 		HttpStatus statusCode = response.getStatusCode();
 
 		if (statusCode == HttpStatus.UNAUTHORIZED) {
-			throw new NotAuthorizedException("User was not authorised.");
+			throw new NotAuthorizedException(Const.providerId, "User was not authorised.");
 		} else if (statusCode == HttpStatus.FORBIDDEN) {
-			throw new OperationNotPermittedException("User is forbidden to access this resource.");
+			throw new OperationNotPermittedException(Const.providerId, "User is forbidden to access this resource.");
 		} else if (statusCode == HttpStatus.NOT_FOUND) {
-			throw new ResourceNotFoundException("Resource was not found.");
+			throw new ResourceNotFoundException(Const.providerId, "Resource was not found.");
         }
 	}
 
 	private void handleServerErrors(HttpStatus statusCode) throws IOException {
 		if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR) {
-			throw new InternalServerErrorException("Something is broken at Mailru.");
+			throw new InternalServerErrorException(Const.providerId, "Something is broken at Mailru.");
 		} else if (statusCode == HttpStatus.BAD_GATEWAY) {
-			throw new ServerDownException("Mailru is down or is being upgraded.");
+			throw new ServerDownException(Const.providerId, "Mailru is down or is being upgraded.");
 		} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
-			throw new ServerOverloadedException("Mailru is overloaded with requests. Try again later.");
+			throw new ServerOverloadedException(Const.providerId, "Mailru is overloaded with requests. Try again later.");
 		}
 	}
 }
