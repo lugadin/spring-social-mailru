@@ -25,19 +25,20 @@ import org.springframework.social.mailru.api.MailruProfile;
 
 /**
  * Mailru ApiAdapter implementation.
+ *
  * @author Cackle
  */
 public class MailruAdapter implements ApiAdapter<Mailru> {
 
     @Override
-	public boolean test(Mailru mailru) {
-		try {
-		    mailru.usersOperations().getProfile();
-			return true;
-		} catch (ApiException e) {
-			return false;
-		}
-	}
+    public boolean test(Mailru mailru) {
+        try {
+            mailru.usersOperations().getProfile();
+            return true;
+        } catch (ApiException e) {
+            return false;
+        }
+    }
 
     @Override
     public void setConnectionValues(Mailru mailru, ConnectionValues values) {
@@ -52,11 +53,11 @@ public class MailruAdapter implements ApiAdapter<Mailru> {
     public UserProfile fetchUserProfile(Mailru mailru) {
         MailruProfile profile = mailru.usersOperations().getProfile();
         return new UserProfileBuilder()
-            .setFirstName(profile.getFirstName())
-            .setLastName(profile.getLastName())
-            .setName(profile.getFirstName() + " " + profile.getLastName())
-            .setEmail(profile.getEmail())
-            .build();
+                .setFirstName(profile.getFirstName())
+                .setLastName(profile.getLastName())
+                .setName(profile.getFirstName() + " " + profile.getLastName())
+                .setEmail(profile.getEmail())
+                .build();
     }
 
     @Override

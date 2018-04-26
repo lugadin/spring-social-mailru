@@ -1,14 +1,14 @@
 package org.springframework.social.mailru.api.impl;
 
-import java.net.URI;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.social.mailru.api.WallOperations;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WallTemplate extends AbstractMailruOperations implements WallOperations {
 
@@ -17,7 +17,7 @@ public class WallTemplate extends AbstractMailruOperations implements WallOperat
     private final RestTemplate restTemplate;
 
     public WallTemplate(String clientId, String clientSecret, RestTemplate restTemplate,
-        String accessToken, boolean isAuthorizedForUser) {
+                        String accessToken, boolean isAuthorizedForUser) {
 
         super(clientId, clientSecret, accessToken, isAuthorizedForUser);
         this.restTemplate = restTemplate;

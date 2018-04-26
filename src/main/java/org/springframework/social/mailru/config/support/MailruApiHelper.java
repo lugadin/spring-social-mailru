@@ -11,8 +11,8 @@ import org.springframework.social.mailru.api.impl.MailruTemplate;
 
 public class MailruApiHelper implements ApiHelper<Mailru> {
 
+    private final static Log logger = LogFactory.getLog(MailruApiHelper.class);
     private final UsersConnectionRepository usersConnectionRepository;
-
     private final UserIdSource userIdSource;
 
     private MailruApiHelper(UsersConnectionRepository usersConnectionRepository, UserIdSource userIdSource) {
@@ -31,7 +31,5 @@ public class MailruApiHelper implements ApiHelper<Mailru> {
         }
         return connection != null ? connection.getApi() : new MailruTemplate();
     }
-
-    private final static Log logger = LogFactory.getLog(MailruApiHelper.class);
 
 }

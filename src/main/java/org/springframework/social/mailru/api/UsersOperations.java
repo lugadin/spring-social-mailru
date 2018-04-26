@@ -17,6 +17,7 @@ package org.springframework.social.mailru.api;
 
 /**
  * User operations.
+ *
  * @author Cackle
  */
 public interface UsersOperations {

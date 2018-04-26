@@ -1,13 +1,14 @@
 package org.springframework.social.mailru.api.impl;
 
+import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.mailru.Const;
+import org.springframework.util.DigestUtils;
+
 import java.net.URLEncoder;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import org.springframework.social.MissingAuthorizationException;
-import org.springframework.social.mailru.Const;
-import org.springframework.util.DigestUtils;
 
 public abstract class AbstractMailruOperations {
 

@@ -15,10 +15,9 @@
  */
 package org.springframework.social.mailru.api;
 
-import java.util.Date;
-
 /**
  * Model class containing a Mailru user's profile information.
+ *
  * @author Cackle
  */
 public class MailruProfile {
@@ -65,12 +64,12 @@ public class MailruProfile {
         return link;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     public String getPhoto() {
         return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getBirthday() {

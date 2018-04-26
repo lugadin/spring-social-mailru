@@ -15,10 +15,9 @@
  */
 package org.springframework.social.mailru.connect;
 
-import org.springframework.http.*;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
@@ -30,15 +29,16 @@ import java.util.Map;
 
 /**
  * Mailru-specific extension of OAuth2Template.
+ *
  * @author Cackle
  */
 public class MailruOAuth2Template extends OAuth2Template {
 
     private String uid;
 
-	public MailruOAuth2Template(String clientId, String clientSecret) {
-		super(clientId, clientSecret, "https://connect.mail.ru/oauth/authorize", "https://connect.mail.ru/oauth/token");
-	    setUseParametersForClientAuthentication(true);
+    public MailruOAuth2Template(String clientId, String clientSecret) {
+        super(clientId, clientSecret, "https://connect.mail.ru/oauth/authorize", "https://connect.mail.ru/oauth/token");
+        setUseParametersForClientAuthentication(true);
     }
 
     @Override
@@ -57,11 +57,11 @@ public class MailruOAuth2Template extends OAuth2Template {
     }
 
     private AccessGrant extractAccessGrant(Map<String, Object> result) {
-        String accessToken = (String)result.get("access_token");
-        String scope = (String)result.get("scope");
-        String refreshToken = (String)result.get("refresh_token");
+        String accessToken = (String) result.get("access_token");
+        String scope = (String) result.get("scope");
+        String refreshToken = (String) result.get("refresh_token");
         Number expiresInNumber = (Number) result.get("expires_in");
-        Long expiresIn = expiresInNumber == null?null:Long.valueOf(expiresInNumber.longValue());
+        Long expiresIn = expiresInNumber == null ? null : Long.valueOf(expiresInNumber.longValue());
         return this.createAccessGrant(accessToken, scope, refreshToken, expiresIn, result);
     }
 

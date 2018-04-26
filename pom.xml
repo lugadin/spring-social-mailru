@@ -10,7 +10,11 @@
 	<description>Spring Social extension with connection support and an API binding for mail.ru</description>
 
 	<properties>
-		<spring.social.version>1.1.0.RELEASE</spring.social.version>
+		<spring.social.version>1.1.4.RELEASE</spring.social.version>
+		<jackson.version>2.7.3</jackson.version>
+        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<packaging>jar</packaging>
@@ -62,7 +66,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.4.3</version>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<dependency>
@@ -89,24 +93,16 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
-
-	<distributionManagement>
-		<repository>
-			<id>nexus-airlabs</id>
-			<name>airlabs</name>
-			<url>http://alpha.airlabs.ru:8081/nexus/content/repositories/airlabs</url>
-		</repository>
-	</distributionManagement>
-
 </project>

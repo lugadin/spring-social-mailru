@@ -30,6 +30,7 @@ import java.util.List;
 
 /**
  * Mailru template
+ *
  * @author Cackle
  */
 public class MailruTemplate extends AbstractOAuth2ApiBinding implements Mailru {

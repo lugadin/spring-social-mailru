@@ -26,46 +26,47 @@ import java.io.IOException;
 /**
  * Subclass of {@link DefaultResponseErrorHandler} that handles errors from Mailru's
  * API, interpreting them into appropriate exceptions.
+ *
  * @author Cackle
  */
 public class MailruErrorHandler extends DefaultResponseErrorHandler {
 
-	@Override
-	public void handleError(ClientHttpResponse response) throws IOException {
-		HttpStatus statusCode = response.getStatusCode();
-		if (statusCode.series() == HttpStatus.Series.SERVER_ERROR) {
-			handleServerErrors(statusCode);
-		} else if (statusCode.series() == HttpStatus.Series.CLIENT_ERROR) {
-			handleClientErrors(response);
-		}
-
-		// if not otherwise handled, do default handling and wrap with UncategorizedApiException
-		try {
-			super.handleError(response);
-		} catch(Exception e) {
-			throw new UncategorizedApiException(Const.providerId, "Error consuming Mailru REST API", e);
-		}
-	}
-
-	private void handleClientErrors(ClientHttpResponse response) throws IOException {
-		HttpStatus statusCode = response.getStatusCode();
-
-		if (statusCode == HttpStatus.UNAUTHORIZED) {
-			throw new NotAuthorizedException(Const.providerId, "User was not authorised.");
-		} else if (statusCode == HttpStatus.FORBIDDEN) {
-			throw new OperationNotPermittedException(Const.providerId, "User is forbidden to access this resource.");
-		} else if (statusCode == HttpStatus.NOT_FOUND) {
-			throw new ResourceNotFoundException(Const.providerId, "Resource was not found.");
+    @Override
+    public void handleError(ClientHttpResponse response) throws IOException {
+        HttpStatus statusCode = response.getStatusCode();
+        if (statusCode.series() == HttpStatus.Series.SERVER_ERROR) {
+            handleServerErrors(statusCode);
+        } else if (statusCode.series() == HttpStatus.Series.CLIENT_ERROR) {
+            handleClientErrors(response);
         }
-	}
 
-	private void handleServerErrors(HttpStatus statusCode) throws IOException {
-		if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR) {
-			throw new InternalServerErrorException(Const.providerId, "Something is broken at Mailru.");
-		} else if (statusCode == HttpStatus.BAD_GATEWAY) {
-			throw new ServerDownException(Const.providerId, "Mailru is down or is being upgraded.");
-		} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
-			throw new ServerOverloadedException(Const.providerId, "Mailru is overloaded with requests. Try again later.");
-		}
-	}
+        // if not otherwise handled, do default handling and wrap with UncategorizedApiException
+        try {
+            super.handleError(response);
+        } catch (Exception e) {
+            throw new UncategorizedApiException(Const.providerId, "Error consuming Mailru REST API", e);
+        }
+    }
+
+    private void handleClientErrors(ClientHttpResponse response) throws IOException {
+        HttpStatus statusCode = response.getStatusCode();
+
+        if (statusCode == HttpStatus.UNAUTHORIZED) {
+            throw new NotAuthorizedException(Const.providerId, "User was not authorised.");
+        } else if (statusCode == HttpStatus.FORBIDDEN) {
+            throw new OperationNotPermittedException(Const.providerId, "User is forbidden to access this resource.");
+        } else if (statusCode == HttpStatus.NOT_FOUND) {
+            throw new ResourceNotFoundException(Const.providerId, "Resource was not found.");
+        }
+    }
+
+    private void handleServerErrors(HttpStatus statusCode) throws IOException {
+        if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR) {
+            throw new InternalServerErrorException(Const.providerId, "Something is broken at Mailru.");
+        } else if (statusCode == HttpStatus.BAD_GATEWAY) {
+            throw new ServerDownException(Const.providerId, "Mailru is down or is being upgraded.");
+        } else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
+            throw new ServerOverloadedException(Const.providerId, "Mailru is overloaded with requests. Try again later.");
+        }
+    }
 }

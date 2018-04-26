@@ -21,6 +21,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 
 /**
  * Mailru ServiceProvider implementation.
+ *
  * @author Cackle
  */
 public class MailruServiceProvider extends AbstractOAuth2ServiceProvider<Mailru> {
@@ -29,13 +30,13 @@ public class MailruServiceProvider extends AbstractOAuth2ServiceProvider<Mailru>
 
     private final String clientSecret;
 
-	public MailruServiceProvider(String clientId, String clientSecret) {
+    public MailruServiceProvider(String clientId, String clientSecret) {
         super(new MailruOAuth2Template(clientId, clientSecret));
         this.clientId = clientId;
         this.clientSecret = clientSecret;
-	}
+    }
 
     public Mailru getApi(String accessToken) {
-		return new MailruTemplate(clientId, clientSecret, accessToken);
-	}
+        return new MailruTemplate(clientId, clientSecret, accessToken);
+    }
 }
