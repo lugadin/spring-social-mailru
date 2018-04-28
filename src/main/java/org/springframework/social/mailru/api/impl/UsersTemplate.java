@@ -36,20 +36,26 @@ public class UsersTemplate extends AbstractMailruOperations implements UsersOper
         params.put("method", METHOD);
         URI uri = URIBuilder.fromUri(makeOperationURL(params)).build();
 
-        List<Map<String, String>> profiles = restTemplate.getForObject(uri, List.class);
+        List<Map<String, Object>> profiles = restTemplate.getForObject(uri, List.class);
         //checkForError(profiles);
 
         if (!profiles.isEmpty()) {
-            Map<String, String> profilesMap = profiles.get(0);
-            MailruProfile profile = new MailruProfile(profilesMap.get("uid"), profilesMap.get("first_name"),
-                    profilesMap.get("last_name"), profilesMap.get("email"), profilesMap.get("link"));
+            Map<String, Object> profilesMap = profiles.get(0);
+            MailruProfile profile = new MailruProfile(
+                    (String)profilesMap.get("uid"),
+                    (String)profilesMap.get("first_name"),
+                    (String)profilesMap.get("last_name"),
+                    (String)profilesMap.get("email"),
+                    (String)profilesMap.get("link"),
+                    (Integer)profilesMap.get("sex")
+            );
 
             if (profilesMap.containsKey("pic")) {
-                profile.setPhoto(profilesMap.get("pic"));
+                profile.setPhoto((String)profilesMap.get("pic"));
             }
 
             if (profilesMap.containsKey("birthday")) {
-                profile.setBirthday(profilesMap.get("birthday"));
+                profile.setBirthday((String)profilesMap.get("birthday"));
             }
 
             return profile;
