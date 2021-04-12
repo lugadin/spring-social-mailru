@@ -20,6 +20,4 @@ import org.springframework.social.ApiBinding;
 public interface Mailru extends ApiBinding {
 
     public UsersOperations usersOperations();
-
-    public WallOperations wallOperations();
 }

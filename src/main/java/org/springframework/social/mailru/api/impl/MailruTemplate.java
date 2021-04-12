@@ -38,7 +38,7 @@ public class MailruTemplate extends AbstractOAuth2ApiBinding implements Mailru {
 
     private UsersOperations usersOperations;
 
-    private WallOperations wallOperations;
+
 
     private String clientId;
 
@@ -83,7 +83,6 @@ public class MailruTemplate extends AbstractOAuth2ApiBinding implements Mailru {
 
     private void initSubApis() {
         usersOperations = new UsersTemplate(clientId, clientSecret, getRestTemplate(), accessToken, isAuthorized());
-        wallOperations = new WallTemplate(clientId, clientSecret, getRestTemplate(), accessToken, isAuthorized());
     }
 
     @Override
@@ -91,8 +90,5 @@ public class MailruTemplate extends AbstractOAuth2ApiBinding implements Mailru {
         return usersOperations;
     }
 
-    @Override
-    public WallOperations wallOperations() {
-        return wallOperations;
-    }
+
 }

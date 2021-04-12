@@ -40,30 +40,32 @@ public class UsersTemplate extends AbstractMailruOperations implements UsersOper
         params.put("method", METHOD);
         URI uri = URIBuilder.fromUri(makeOperationURL2(params)).build();
 
-        List<Map<String, Object>> profiles = restTemplate.getForObject(uri, List.class);
+        Map<String, Object> profiles = restTemplate.getForObject(uri, Map.class);
         //checkForError(profiles);
 
         if (!profiles.isEmpty()) {
-            Map<String, Object> profilesMap = profiles.get(0);
+
             MailruProfile profile = new MailruProfile(
-                    (String)profilesMap.get("id"),
-                    (String)profilesMap.get("first_name"),
-                    (String)profilesMap.get("last_name"),
-                    (String)profilesMap.get("email"),
-                    (String)profilesMap.get("link"),
-                    (Integer)profilesMap.get("gender")
+                    (String)profiles.get("id"),
+                    (String)profiles.get("first_name"),
+                    (String)profiles.get("last_name"),
+                    (String)profiles.get("email"),
+                    (String)profiles.get("link")
             );
 
-            if (profilesMap.containsKey("image")) {
-                profile.setPhoto((String)profilesMap.get("image"));
+            if (profiles.containsKey("image")) {
+                profile.setPhoto((String)profiles.get("image"));
             }
 
-            if (profilesMap.containsKey("birthday")) {
-                profile.setBirthday((String)profilesMap.get("birthday"));
+            if (profiles.containsKey("birthday")) {
+                profile.setBirthday((String)profiles.get("birthday"));
             }
 
             return profile;
         }
         return null;
+    }
+
+    private class Ans {
     }
 }

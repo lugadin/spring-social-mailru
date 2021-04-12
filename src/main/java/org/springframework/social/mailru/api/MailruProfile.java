@@ -36,15 +36,14 @@ public class MailruProfile {
 
     private String birthday;
 
-    private int sex;
 
-    public MailruProfile(String uid, String firstName, String lastName, String email, String link, int sex) {
+    public MailruProfile(String uid, String firstName, String lastName, String email, String link) {
         this.uid = uid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.link = link;
-        this.sex = sex;
+
     }
 
     public String getUid() {
@@ -83,7 +82,5 @@ public class MailruProfile {
         this.birthday = birthday;
     }
 
-    public int getSex() {
-        return sex;
-    }
+
 }
