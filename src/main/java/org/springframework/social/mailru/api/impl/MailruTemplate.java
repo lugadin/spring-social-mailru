@@ -63,22 +63,22 @@ public class MailruTemplate extends AbstractOAuth2ApiBinding implements Mailru {
         initSubApis();
     }
 
-//    private void registerJsonModule() {
-//        List<HttpMessageConverter<?>> converters = getRestTemplate().getMessageConverters();
-//        for (HttpMessageConverter<?> converter : converters) {
-//            if (converter instanceof MappingJackson2HttpMessageConverter) {
-//                MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
-//
-//                List<MediaType> mTypes = new LinkedList<MediaType>(jsonConverter.getSupportedMediaTypes());
-//                mTypes.add(new MediaType("text", "javascript", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET));
-//                jsonConverter.setSupportedMediaTypes(mTypes);
-//
-//                ObjectMapper objectMapper = new ObjectMapper();
-//                //objectMapper.registerModule(new MailruModule());
-//                jsonConverter.setObjectMapper(objectMapper);
-//            }
-//        }
-//    }
+    private void registerJsonModule() {
+        List<HttpMessageConverter<?>> converters = getRestTemplate().getMessageConverters();
+        for (HttpMessageConverter<?> converter : converters) {
+            if (converter instanceof MappingJackson2HttpMessageConverter) {
+                MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
+
+                List<MediaType> mTypes = new LinkedList<MediaType>(jsonConverter.getSupportedMediaTypes());
+                mTypes.add(new MediaType("text", "javascript", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET));
+                jsonConverter.setSupportedMediaTypes(mTypes);
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                //objectMapper.registerModule(new MailruModule());
+                jsonConverter.setObjectMapper(objectMapper);
+            }
+        }
+    }
 
     private void initSubApis() {
         usersOperations = new UsersTemplate(clientId, clientSecret, getRestTemplate(), accessToken, isAuthorized());
