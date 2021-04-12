@@ -37,7 +37,7 @@ public class MailruOAuth2Template extends OAuth2Template {
     private String uid;
 
     public MailruOAuth2Template(String clientId, String clientSecret) {
-        super(clientId, clientSecret, "https://connect.mail.ru/oauth/authorize", "https://oauth.mail.ru/token");
+        super(clientId, clientSecret, "https://oauth.mail.ru/login", "https://oauth.mail.ru/token");
         setUseParametersForClientAuthentication(true);
     }
 
