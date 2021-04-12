@@ -27,9 +27,6 @@ public class UsersTemplate extends AbstractMailruOperations implements UsersOper
 
 
         super(clientId, clientSecret, accessToken, isAuthorizedForUser);
-        System.out.println(clientId);
-        System.out.println(clientSecret);
-        System.out.println(accessToken);
         this.restTemplate = restTemplate;
     }
 
@@ -41,7 +38,7 @@ public class UsersTemplate extends AbstractMailruOperations implements UsersOper
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("method", METHOD);
-        URI uri = URIBuilder.fromUri(makeOperationURL(params)).build();
+        URI uri = URIBuilder.fromUri(makeOperationURL2(params)).build();
 
         List<Map<String, Object>> profiles = restTemplate.getForObject(uri, List.class);
         //checkForError(profiles);
@@ -49,16 +46,16 @@ public class UsersTemplate extends AbstractMailruOperations implements UsersOper
         if (!profiles.isEmpty()) {
             Map<String, Object> profilesMap = profiles.get(0);
             MailruProfile profile = new MailruProfile(
-                    (String)profilesMap.get("uid"),
+                    (String)profilesMap.get("id"),
                     (String)profilesMap.get("first_name"),
                     (String)profilesMap.get("last_name"),
                     (String)profilesMap.get("email"),
                     (String)profilesMap.get("link"),
-                    (Integer)profilesMap.get("sex")
+                    (Integer)profilesMap.get("gender")
             );
 
-            if (profilesMap.containsKey("pic")) {
-                profile.setPhoto((String)profilesMap.get("pic"));
+            if (profilesMap.containsKey("image")) {
+                profile.setPhoto((String)profilesMap.get("image"));
             }
 
             if (profilesMap.containsKey("birthday")) {

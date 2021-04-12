@@ -47,6 +47,17 @@ public abstract class AbstractMailruOperations {
         }
     }
 
+
+    protected String makeOperationURL2(Map<String, String> params) {
+        this.params.putAll(params);
+
+        StringBuilder url = new StringBuilder("https://oauth.mail.ru/userinfo?access_token="+this.accessToken);
+
+
+        return url.toString();
+    }
+
+
     protected String makeOperationURL(Map<String, String> params) {
         this.params.putAll(params);
 
