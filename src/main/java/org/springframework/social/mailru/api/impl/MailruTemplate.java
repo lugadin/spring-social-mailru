@@ -58,7 +58,7 @@ public class MailruTemplate extends AbstractOAuth2ApiBinding implements Mailru {
     }
 
     private void initialize() {
-//        registerJsonModule();
+        registerJsonModule();
         getRestTemplate().setErrorHandler(new MailruErrorHandler());
         initSubApis();
     }
@@ -74,7 +74,7 @@ public class MailruTemplate extends AbstractOAuth2ApiBinding implements Mailru {
                 jsonConverter.setSupportedMediaTypes(mTypes);
 
                 ObjectMapper objectMapper = new ObjectMapper();
-                //objectMapper.registerModule(new MailruModule());
+//                objectMapper.registerModule(new MailruModule());
                 jsonConverter.setObjectMapper(objectMapper);
             }
         }
