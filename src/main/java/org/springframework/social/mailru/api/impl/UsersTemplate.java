@@ -24,12 +24,19 @@ public class UsersTemplate extends AbstractMailruOperations implements UsersOper
     public UsersTemplate(String clientId, String clientSecret, RestTemplate restTemplate,
                          String accessToken, boolean isAuthorizedForUser) {
 
+
+
         super(clientId, clientSecret, accessToken, isAuthorizedForUser);
+        System.out.println(clientId);
+        System.out.println(clientSecret);
+        System.out.println(accessToken);
         this.restTemplate = restTemplate;
     }
 
     @Override
     public MailruProfile getProfile() {
+
+
         requireAuthorization();
 
         Map<String, String> params = new HashMap<String, String>();
