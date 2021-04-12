@@ -25,6 +25,7 @@ import org.springframework.social.mailru.api.UsersOperations;
 import org.springframework.social.mailru.api.WallOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 
+import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class MailruTemplate extends AbstractOAuth2ApiBinding implements Mailru {
                 MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
 
                 List<MediaType> mTypes = new LinkedList<MediaType>(jsonConverter.getSupportedMediaTypes());
-                mTypes.add(new MediaType("text", "javascript", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET));
+                mTypes.add(new MediaType("text", "javascript", Charset.forName("UTF-8")));
                 jsonConverter.setSupportedMediaTypes(mTypes);
 
                 ObjectMapper objectMapper = new ObjectMapper();
