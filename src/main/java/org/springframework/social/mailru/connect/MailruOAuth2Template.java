@@ -65,21 +65,21 @@ public class MailruOAuth2Template extends OAuth2Template {
         return this.createAccessGrant(accessToken, scope, refreshToken, expiresIn, result);
     }
 
-    @Override
-    protected RestTemplate createRestTemplate() {
-        RestTemplate restTemplate = super.createRestTemplate();
-
-        List<HttpMessageConverter<?>> converters = restTemplate.getMessageConverters();
-        for (HttpMessageConverter<?> converter : converters) {
-            if (converter instanceof MappingJackson2HttpMessageConverter) {
-                MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
-
-                List<MediaType> mTypes = new LinkedList<MediaType>(jsonConverter.getSupportedMediaTypes());
-                mTypes.add(new MediaType("text", "javascript", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET));
-                jsonConverter.setSupportedMediaTypes(mTypes);
-            }
-        }
-
-        return restTemplate;
-    }
+//    @Override
+//    protected RestTemplate createRestTemplate() {
+//        RestTemplate restTemplate = super.createRestTemplate();
+//
+//        List<HttpMessageConverter<?>> converters = restTemplate.getMessageConverters();
+//        for (HttpMessageConverter<?> converter : converters) {
+//            if (converter instanceof MappingJackson2HttpMessageConverter) {
+//                MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
+//
+//                List<MediaType> mTypes = new LinkedList<MediaType>(jsonConverter.getSupportedMediaTypes());
+//                mTypes.add(new MediaType("text", "javascript", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET));
+//                jsonConverter.setSupportedMediaTypes(mTypes);
+//            }
+//        }
+//
+//        return restTemplate;
+//    }
 }
